@@ -127,6 +127,9 @@
 ;;keep walking down the tree to add stuff
 ;;reverse the list of values and take the count +1 (offset for the boss ape)
 
+;;stop worring about speed. make it work the slow way then find ways to
+;;speed it up. You'll need (leaf-add node leaf) it'll walk the tree
+;;find the node modify it and return the new tree
 
 ;;we'll also need to build a tree from a string we're given
 ;;default i is 2 (chief is 1)
