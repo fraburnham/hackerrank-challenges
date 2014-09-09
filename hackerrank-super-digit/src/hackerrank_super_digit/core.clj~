@@ -1,0 +1,23 @@
+(ns hackerrank-super-digit.core)
+
+(defn super-digit [n r]
+  (cond
+   (empty? n) (make-num r 1 0)
+   :else
+     (recur (rest n) (+ r (first n)))))
+
+(defn super-digit-wrapper [n]
+  (cond
+   (= 1 (count n)) (reduce str n)
+   :else
+   (recur (super-digit n 0))))
+
+(defn make-num [n k r]
+  (cond
+   (= k 0) (map (fn [x] (Integer/parseInt (str x))) r)
+   :else
+   (recur n (dec k) (str r n))))
+
+;;algo
+   ;;add digits
+   ;;recur

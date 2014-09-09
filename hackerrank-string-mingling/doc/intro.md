@@ -1,0 +1,3 @@
+# Introduction to hackerrank-string-mingling
+
+TODO: write [great documentation](http://jacobian.org/writing/what-to-write/)

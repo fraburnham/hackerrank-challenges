@@ -1,0 +1,2 @@
+cmdhistory=["(price 2 (2 5 6) 0 0)" "(price 2 '(2 5 6) 0 0)" "(price 2 '(2 5 6) 1 0)" "(price 2 '(2 5 6) 0\\n       0)" "(int 3/4)" "(int 1/1)" "(int 2/3)" "(max (int 3/2))" "(max (int 2/3) 1)"]
+eclipse.preferences.version=1

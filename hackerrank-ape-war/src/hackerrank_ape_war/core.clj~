@@ -1,0 +1,84 @@
+(ns hackerrank-ape-war.core)
+
+;;this looks like the way to do the tree
+(def *simple-tree* '((1 (2 ()) (3 ()))))
+
+;;nodes 2 and 3 are on the same level
+;;as are 4 5 6
+;;7 8 9 are at the highest depth
+(def *my-tree* '(1 ((2 ((4 ()) (5 ((7 ()) (8 ()) (9 ()))))) (3 ((6 ()))))))
+
+;;a tree looks like
+;;((n ((c1 ()) (c2 ()))))
+;;a node looks like
+;;(c1 ()) or (n ((c1 ()) (c2 ())))
+;;start with this-node to get the current root node
+;;value
+
+(defmacro child-tree [node]
+  `(first (rest ~node)))
+
+(defmacro next-node [tree]
+  `(first ~tree))
+
+;;rest-nodes returns a tree of the remaining nodes
+(defmacro rest-nodes [tree]
+  `(rest ~tree))
+
+(defmacro this-node [node]
+  `(first ~node))
+
+(defn tree? [tree]
+  (let [v (this-node tree)]
+    (cond
+     (number? v) false
+     :else true)))
+
+;;this is the basic inner loop it won't work for
+;;lots of other cases I wonder how I can generalize it
+(defn inner-loop [c-t parent-fn]
+  (cond
+   (empty? c-t) nil
+   :else
+     (do
+       (parent-fn (next-node c-t))
+       (recur (rest-nodes c-t) parent-fn))))
+
+;;print-nodes is a simple depth-first walk of a tree
+(defn print-nodes [node]
+  (println (this-node node))
+  (inner-loop (child-tree node) print-nodes))
+
+(defn print-path 
+  ([node] (print-path node " "))
+  ([node path]
+     (println (str path " " (this-node node)))
+     (loop [c-t (child-tree node)
+            p (str path " " (this-node node))]
+       (cond
+        (empty? c-t) nil
+        :else
+          (do
+            (print-path (next-node c-t) p)
+            (recur (rest-nodes c-t) p))))))
+
+;;so? we can get a list of two paths
+;;find the first in common node and solve for the path from there
+(defn first-common-element [list-a list-b]
+  ;;for elem in list-a: for elemb in list-b: if elem == elemb
+  (cond
+    (empty? list-a) nil
+    :else
+    (do
+     (let [elem-a (first list-a)]
+       (cond
+        (loop [b (rest list-b)
+	       elem-b (first list-b)]
+          (cond
+	   (not (number? elem-b)) false
+	   (= elem-b elem-a) true
+	   :else
+	     (recur (rest b) (first b)))) ;;if the loop returns true instead of false
+	elem-a
+	:else
+	 (recur (rest list-a) list-b))))))
