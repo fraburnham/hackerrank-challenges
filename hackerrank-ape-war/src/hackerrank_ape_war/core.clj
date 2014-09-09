@@ -73,6 +73,7 @@
       :else (list (conj a last) (conj b last)))))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;;stop worring about speed. make it work the slow way then find ways to
 ;;speed it up. You'll need (leaf-add node leaf) it'll walk the tree
 ;;find the node modify it and return the new tree viola
@@ -91,6 +92,11 @@
 ;;speed it up. You'll need (leaf-add node leaf) it'll walk the tree
 ;;find the node modify it and return the new tree
 >>>>>>> 54fb9a52cc2068b0c8e7f5da49f8ce48779a7b39
+=======
+;;stop worring about speed. make it work the slow way then find ways to
+;;speed it up. You'll need (leaf-add node leaf) it'll walk the tree
+;;find the node modify it and return the new tree viola
+>>>>>>> 295bf6641641302b93b0bf9b912980007ad89fec
 
 (defn append-node
   "Append node to root-node"
