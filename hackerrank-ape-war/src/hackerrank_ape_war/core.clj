@@ -72,9 +72,25 @@
       (= (first a) (first b)) (recur (rest a) (rest b) (first a))
       :else (list (conj a last) (conj b last)))))
 
+<<<<<<< HEAD
 ;;stop worring about speed. make it work the slow way then find ways to
 ;;speed it up. You'll need (leaf-add node leaf) it'll walk the tree
 ;;find the node modify it and return the new tree viola
+=======
+;;takes two already reduced paths and joins them on the first element
+(defmacro join-paths [a b]
+  ;;reverse the rest of a and concat onto b
+  `(concat (reverse (rest ~a)) ~b))
+
+
+;;it would be faster to build the tree from the bottom, you wouldn't have
+;;keep walking down the tree to add stuff
+;;reverse the list of values and take the count +1 (offset for the boss ape)
+
+;;stop worring about speed. make it work the slow way then find ways to
+;;speed it up. You'll need (leaf-add node leaf) it'll walk the tree
+;;find the node modify it and return the new tree
+>>>>>>> 54fb9a52cc2068b0c8e7f5da49f8ce48779a7b39
 
 (defn append-node
   "Append node to root-node"
