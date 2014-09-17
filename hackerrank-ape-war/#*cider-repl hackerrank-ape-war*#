@@ -1,0 +1,116 @@
+; CIDER 0.6.0 (Java 1.7.0_65, Clojure 1.6.0, nREPL 0.2.3)
+user> (((fn [x y] (+ x y))) 4 5)
+ArityException Wrong number of args (0) passed to: user/eval1086/fn--1087  clojure.lang.AFn.throwArity (AFn.java:429)
+user> (((fn [x y] (+ x y)) 4 5))
+ClassCastException java.lang.Long cannot be cast to clojure.lang.IFn  user/eval1090 (form-init1937606274491584893.clj:1)
+user> ((fn [x y] (+ x y)) 4 5)
+9
+user> (= 9 (((fn [] (fn [x y] (+ x y)))) 4 5))
+true
+user> (fn [f] 
+        (f 5 5))
+      (fn [n] (* n n)))
+#<user$eval1104$fn__1105 user$eval1104$fn__1105@2e4ca60c>
+#<user$eval1108$fn__1109 user$eval1108$fn__1109@1d305c92>RuntimeException Unmatched delimiter: )  clojure.lang.Util.runtimeException (Util.java:221)
+user> (fn [f] 
+        (f 5 5))
+      (fn [n] (* n n))
+#<user$eval1114$fn__1115 user$eval1114$fn__1115@296e8472>
+#<user$eval1118$fn__1119 user$eval1118$fn__1119@6e3f6f3>
+user> '(-1 4 5 -23 154 -345)
+(-1 4 5 -23 154 -345)
+user> (def a '(-1 4 5 -23 154 -345))
+#'user/a
+user> (map (fn [x] (cond (neg? x) (- x) :else x)) a)
+(1 4 5 23 154 345)
+user> 
+#<Namespace hackerrank-ape-war.core>
+hackerrank-ape-war.core> *my-tree*
+(1 ((2 ((4 ()) (5 ((7 ()) (8 ()) (9 ()))))) (3 ((6 ())))))
+hackerrank-ape-war.core> (next-node *my-tree*)
+1
+hackerrank-ape-war.core> (rest-nodes *my-tree*)
+(((2 ((4 ()) (5 ((7 ()) (8 ()) (9 ()))))) (3 ((6 ())))))
+hackerrank-ape-war.core> (def *simple-node* '(1 ()))
+Warning: *simple-node* not declared dynamic and thus is not dynamically rebindable, but its name suggests otherwise. Please either indicate ^:dynamic *simple-node* or change the name. (/tmp/form-init1937606274491584893.clj:1)
+#'hackerrank-ape-war.core/*simple-node*
+hackerrank-ape-war.core> *simple-node*
+(1 ())
+hackerrank-ape-war.core> (rest-nodes *simple-node)
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: *simple-node in this context, compiling:(/tmp/form-init1937606274491584893.clj:1:1) 
+hackerrank-ape-war.core> (rest-nodes *simple-node*)
+(())
+hackerrank-ape-war.core> (first (rest *simple-node*))
+()
+hackerrank-ape-war.core> (cons 1 '(()))
+(1 ())
+hackerrank-ape-war.core> (cons :node (first (rest *simple-node*)))
+(:node)
+hackerrank-ape-war.core> (cons 1 (list (cons :node (first (rest *simple-node*)))))
+(1 (:node))
+hackerrank-ape-war.core> (append-node *simple-node* '(2 ()))
+(1 ((2 ())))
+hackerrank-ape-war.core> (append-node *simple-node* '(2 ()))
+(1 (2 ()))
+hackerrank-ape-war.core> (append-node *simple-node* '(2 ()))
+(1 ((2 ())))
+hackerrank-ape-war.core> (append-node *my-tree* '(:fuck-node ()))
+(1 ((:fuck-node ()) (2 ((4 ()) (5 ((7 ()) (8 ()) (9 ()))))) (3 ((6 ())))))
+hackerrank-ape-war.core> (make-node 15)
+(15 ())
+hackerrank-ape-war.core> (append-node (make-node 15) 17)
+(15 (17))
+hackerrank-ape-war.core> (append-node (make-node 15) (make-node 17))
+(15 ((17 ())))
+hackerrank-ape-war.core> (find-node *my-node* 3)
+(3 ((6 ())))
+hackerrank-ape-war.core> (nil? 0)
+false
+hackerrank-ape-war.core> (if (nil? 0) :a)
+nil
+hackerrank-ape-war.core> (defn explain-defcon-level [exercise-term]
+  (case exercise-term
+        :fade-out          :you-and-what-army
+        :double-take       :call-me-when-its-important
+        :round-house       :o-rly
+        :fast-pace         :thats-pretty-bad
+        :cocked-pistol     :sirens
+        :say-what?))
+#'hackerrank-ape-war.core/explain-defcon-level
+hackerrank-ape-war.core> (explain-defcon-level :poop)
+:say-what?
+hackerrank-ape-war.core> (map nil? [:a :b nil :c :d])
+(false false true false false)
+hackerrank-ape-war.core> (filter (fn [x] false) '(:anything :goes :here))
+()
+hackerrank-ape-war.core> (reduce (fn [a b] (* a b)) [1 2 3 4])
+24
+hackerrank-ape-war.core> (reduce (fn [a b] (* a b)) [10 10 10 10] [1 2 3 4])
+ClassCastException clojure.lang.PersistentVector cannot be cast to java.lang.Number  clojure.lang.Numbers.multiply (Numbers.java:146)
+hackerrank-ape-war.core> (reduce (fn [a b] (* a b)) 10 [1 2 3 4])
+240
+hackerrank-ape-war.core> (reduce (fn [a b] (* a b)) 100 [1 2 3 4])
+2400
+hackerrank-ape-war.core> (< "a" "abc")
+ClassCastException java.lang.String cannot be cast to java.lang.Number  clojure.lang.Numbers.lt (Numbers.java:219)
+hackerrank-ape-war.core> (reduce (fn [a b] (* a b)) 100 [1 2 3 4])
+2400
+hackerrank-ape-war.core> (map (fn [x] (* x x) [1 2 3 4 5]))
+ArityException Wrong number of args (1) passed to: core/map  clojure.lang.AFn.throwArity (AFn.java:429)
+hackerrank-ape-war.core> (filter (fn [x] (<= 30 x)) [10 20 30 40 50 60 70 80])
+(30 40 50 60 70 80)
+hackerrank-ape-war.core> (def tree '(1 ((2 ()) (3 ()))))
+#'hackerrank-ape-war.core/tree
+hackerrank-ape-war.core> (def n '(4 ()))
+#'hackerrank-ape-war.core/n
+hackerrank-ape-war.core> (cons n (child-tree tree))
+((4 ()) (2 ()) (3 ()))
+hackerrank-ape-war.core> (use 'regex)
+FileNotFoundException Could not locate regex__init.class or regex.clj on classpath:   clojure.lang.RT.load (RT.java:443)
+hackerrank-ape-war.core> (import 'regex)
+ClassNotFoundException regex  java.net.URLClassLoader$1.run (URLClassLoader.java:366)
+hackerrank-ape-war.core> (import 're)
+ClassNotFoundException re  java.net.URLClassLoader$1.run (URLClassLoader.java:366)
+hackerrank-ape-war.core> (import 'Regex)
+ClassNotFoundException Regex  java.net.URLClassLoader$1.run (URLClassLoader.java:366)
+hackerrank-ape-war.core> 

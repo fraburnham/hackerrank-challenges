@@ -1,0 +1,4 @@
+(ns hackerrank-list-replication.core)
+
+(defn dup [n lst]
+  

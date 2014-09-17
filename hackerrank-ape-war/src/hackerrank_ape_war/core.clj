@@ -13,6 +13,9 @@
 (defmacro this-node [node]
   `(first ~node))
 
+(defmacro make-node [value]
+  `'(~value ()))
+
 ;;takes two already reduced paths and joins them on the first element
 (defmacro join-paths [a b]
   ;;reverse the rest of a and concat onto b
@@ -72,37 +75,22 @@
       (= (first a) (first b)) (recur (rest a) (rest b) (first a))
       :else (list (conj a last) (conj b last)))))
 
-;;stop worring about speed. make it work the slow way then find ways to
-;;speed it up. You'll need (leaf-add node leaf) it'll walk the tree
-;;find the node modify it and return the new tree viola
-
-;;takes two already reduced paths and joins them on the first element
-(defmacro join-paths [a b]
-  ;;reverse the rest of a and concat onto b
-  `(concat (reverse (rest ~a)) ~b))
-
-
-;;it would be faster to build the tree from the bottom, you wouldn't have
-;;keep walking down the tree to add stuff
-;;reverse the list of values and take the count +1 (offset for the boss ape)
-
-;;stop worring about speed. make it work the slow way then find ways to
-;;speed it up. You'll need (leaf-add node leaf) it'll walk the tree
-;;find the node modify it and return the new tree
-
 (defn append-node
   "Append node to root-node"
   [root-node node]
   (let [t-n (this-node root-node)]
     (cons t-n (list (cons node (first (rest root-node)))))))
-  
-;;we'll also need to build a tree from a string we're given
-;;default i is 2 (chief is 1)
-;;in the string the current i is your id number
-;;the current number is your superior
-;;so we'll need functions like node-insert
-;;for tree manipulation
-(defn build-tree [str-description i])
+
+(defn build-tree [str-description i root-node]
+  ;;start by making the current node
+  ;;find the parent node
+  (let [(make-node (first i))
+        parent (first str-description)
+        ret-tree '()] ;;dunno what to default ret-tree
+    ;;search for the parent
+    ;;once we find it modify the child nodes and return the whole thing
+
+
 
 ;;---------------
 (def *simple-tree* '((1 ((2 ()) (3 ())))))
@@ -142,4 +130,21 @@
           (do
             (print-path (next-node c-t) p)
             (recur (rest-nodes c-t) p))))))
+
+(defn get-node [node find]
+  (let [t-n (this-node node)]
+    (cond
+     (empty? node) nil
+     (= t-n find) node
+     :else
+     (do
+       (loop [c-t (child-tree node)]
+         (cond
+          (empty? c-t) nil
+          :else
+          (do
+            (let [ret (find-node (next-node c-t) find)]
+              (cond
+               (not= nil ret) ret
+               :else (recur (rest-nodes c-t)))))))))))
 

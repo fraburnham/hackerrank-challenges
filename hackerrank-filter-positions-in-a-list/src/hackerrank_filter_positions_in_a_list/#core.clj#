@@ -1,0 +1,10 @@
+(ns hackerrank-filter-positions-in-a-list.core)
+
+(defn foo [lst]
+  (loop [l lst
+       ret []
+       i 0]
+    (cond 
+     (empty? l) ret
+     (= (mod i 2) 1) (recur (rest l) (conj ret (first l)) (+ i 1))
+     :else (recur (rest l) ret (+ i 1)))))
