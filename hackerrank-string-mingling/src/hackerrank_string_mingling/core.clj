@@ -28,3 +28,4 @@
 ;as it turns out the map reduce was slower than just
 ;outputting it. Could have guessed that probably.
 ;two steps are slower than one.
+;map timed out (over 8s) recur's longest time was 3s
