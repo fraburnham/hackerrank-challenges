@@ -1,6 +1,4 @@
 (ns hackerrank-string-o-permute.core)
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn string-o-permute [s]
+  (apply str (flatten (map reverse (partition 2 s)))))
