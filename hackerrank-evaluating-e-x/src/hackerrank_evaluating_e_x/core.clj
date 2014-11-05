@@ -35,3 +35,27 @@
          (recur (dec num-lines)))))
 
 ;) after that...make it anonymous and submit ;)
+((fn get-inputs [num-lines]
+   (if (= 0 num-lines) nil
+       (do
+         ((fn e-expansion 
+            ([x] (e-expansion x 2 (+ 1.0 x)))
+            ([x n ret]
+               (if (= 10 n) (println ret)
+                   (recur x (inc n) (+ ret
+                                       (/ 
+                                        ((fn pow 
+                                           ([n x] (pow n x 1))
+                                           ([n x ret]
+                                              (if (= x 0) ret
+                                                  (recur n (dec x) (* n ret)))))
+                                         x n) 
+                                        ((fn ! 
+                                           ([n] (! n 1))
+                                           ([n ret]
+                                              (if (= n 0) ret
+                                                  (recur (dec n) (* ret n))))) 
+                                         n)))))))
+          (Float/parseFloat (read-line)))
+         (recur (dec num-lines)))))
+       (Integer/parseInt (read-line)))

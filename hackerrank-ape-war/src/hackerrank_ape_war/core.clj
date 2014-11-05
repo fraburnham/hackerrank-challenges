@@ -89,6 +89,7 @@
         ret-tree '()] ;;dunno what to default ret-tree
     ;;search for the parent
     ;;once we find it modify the child nodes and return the whole thing
+))
 
 
 
@@ -147,4 +148,9 @@
               (cond
                (not= nil ret) ret
                :else (recur (rest-nodes c-t)))))))))))
+
+;;so don't stop working on this. understanding trees is super critical
+;;but maybe zippers can be used?
+
+(require '[clojure.zip :as zip])
 

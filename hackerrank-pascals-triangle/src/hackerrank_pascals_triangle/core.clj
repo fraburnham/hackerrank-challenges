@@ -40,7 +40,7 @@
            y n
            ret '()]
       ;;build the seq to return of ((n1 r1) (n1 r2) (etc))
-      (cond
+      (Cond
        (< y 0) ret
        :else
        (recur x (dec y) (cons (list x y) ret))))))
