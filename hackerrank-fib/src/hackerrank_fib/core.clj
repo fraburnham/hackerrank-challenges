@@ -1,13 +1,11 @@
 (ns hackerrank-fib.core)
 
-(defn fib
-  ([n] (fib 0 1N n))
-  ([a b n]
-     (if (= n 0) a
-         (recur b (+ a b) (dec n)))))
+;start with the first two values of the fib seq
+;map adding them together and cat that onto fib
+(def fib (lazy-cat [0 1N] (map + (rest fib) fib)))
 
 (defn fib-mod-exp [n]
-  (mod (fib n) 100000007))
+  (mod (nth fib n) 100000007))
 
 (loop
     [lines  (Integer/parseInt (read-line))]
