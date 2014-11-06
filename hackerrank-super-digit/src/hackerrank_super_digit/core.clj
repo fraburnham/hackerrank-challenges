@@ -1,13 +1,16 @@
 (ns hackerrank-super-digit.core)
+;;super digit for 9875
+;; 9+8+7+5=29
+;; 2+9=11
+;; 1+1 =2
+;; 2
 
-(defn make-num [n]
-  (map (fn [x] (Integer/parseInt (str x))) n))
+;;each step 
+(defn super-digit [n] 
+  (if (< n 10) n
+      (let [x (reduce + (map #(bigint (str %)) (seq (str n))))]
+        (recur x))))
 
-(defn super-digit [n]
-  (cond
-   (= 1 (count n)) (Integer/parseInt (str (first n)))
-   :else
-     (recur (make-num (str (reduce + n))))))
-
-(def d (clojure.string/split (read-line) #" "))
-(super-digit (make-num (str (* (reduce + (make-num (first d))) (Integer/parseInt (last d))))))
+(let [[n k] (map bigint (clojure.string/split (read-line) #" "))
+      p (bigint (apply str (repeat k n)))]
+  (println (int (super-digit p))))

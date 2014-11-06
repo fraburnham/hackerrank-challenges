@@ -5,23 +5,8 @@
 ;;lists so let's think about the list transformations and redo
 ;;some of this mess
 
-;;this factorial is a bit quicker with smaller numbers
-;;compared to the solution using map
-(defn ! 
-  ([n] (! n 1N))
-  ([n ret]
-     (if (= n 0) ret
-         (recur (dec n) (* ret n)))))
-;;(time (! 100000N))
-;;time taken: "Elapsed time: 23860.643874 msecs"
-
-;;bam
 (defn ! [n]
   (reduce * (range 1N (inc n))))
-;;(time (! 100000N))
-;;time taken: "Elapsed time: 21521.075593 msecs"
-;;it's almost too close to care about the speed
-;;it is more clojure
 
 (defn pow 
   ([n x] (pow n x 1))
@@ -44,11 +29,11 @@
   `(Float/parseFloat (read-line)))
 
 (let [N (read-float)
-      facs (map #(reduce * (range 1N (inc %))) (range 2 10))]
+      facs (map ! (range 2 10))]
   (loop [count N]
     (if (< count 1) nil
         (let [x (read-float)
-              pows (map #(reduce * (repeat %2 %1)) (repeat x) (range 2 10))]
+              pows (map pow (repeat x) (range 2 10))]
           (println (float (+ 1 x (reduce + (map / pows facs)))))
           (recur (dec count))))))
  
