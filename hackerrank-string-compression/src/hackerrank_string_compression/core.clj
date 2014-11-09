@@ -1,5 +1,8 @@
 (ns hackerrank-string-compression.core)
 
+;this is in clojure but it is not clojure
+;make it pretty
+
 (defn string-compression [s & 
                           {:keys [prev count ret] 
                            :or {prev "" count 1 ret ""}}]

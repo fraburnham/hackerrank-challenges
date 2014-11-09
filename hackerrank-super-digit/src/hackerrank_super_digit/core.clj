@@ -14,3 +14,4 @@
 (let [[n k] (map bigint (clojure.string/split (read-line) #" "))
       p (bigint (apply str (repeat k n)))]
   (println (int (super-digit p))))
+;;not fast enough!
