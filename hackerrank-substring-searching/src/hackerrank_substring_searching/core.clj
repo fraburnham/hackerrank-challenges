@@ -1,24 +1,22 @@
 (ns hackerrank-substring-searching.core)
 
-;substring search
-;if the current char matches the first search char
-;then (rest) both of them and recur and set match to true
-;(seems like having to pass a value forward is an example of when
-;we could HOF a different more clojurey solution)
-;if they don't match set match to false
-;if (nil? search-string-seq) match
-
+;forcing types is supposed to improve execution time
+;I'm slow on the last two test cases, let's see if this works as a fix
+;still timeout on the last two test cases sadface
 (defn substring? [sourcestr findstr]
-  (loop [sstr sourcestr
-         fstr findstr
-         match false]
-    (if (or (empty? sstr) (empty? fstr)) match
-        (if (= (first sstr)
-               (first fstr))
-          (recur (rest sstr) (rest fstr) true)
-          (if match
-            (recur (rest sstr) findstr false)
-            (recur (rest sstr) fstr false))))))
+  (loop [sstr (seq sourcestr)
+         fstr (seq findstr)
+         matchloc (int 1)
+         match (boolean false)]
+    (if (or (empty? sstr) (empty? fstr))
+      (if (empty? fstr) match false)
+      (if (= (first sstr) (first fstr))
+        (recur (rest sstr) (rest fstr) matchloc (boolean true))
+        (if match
+          (recur (drop matchloc sourcestr) findstr 
+                 (+ 1 matchloc) (boolean false))
+          (recur (rest sstr) fstr 
+                 (inc matchloc) (boolean false)))))))
        
 
 (loop [testcount (Integer/parseInt (read-line))]
@@ -29,4 +27,3 @@
       (do
         (if (substring? sourcestr findstr) (println "YES") (println "NO"))
         (recur (dec testcount))))))
-      
