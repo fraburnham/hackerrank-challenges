@@ -1,24 +1,20 @@
 (ns hackerrank-rmq.core)
 (require '[clojure.string :as s])
 
-;;this solution is too slow for full credit...
-
 (defn parse-int-seq [s]
   (map (fn [x] (Integer/parseInt x)) s))
 
 (defn subseq [s start end]
-  (first (split-at (+ (- end start) 1) (last (split-at start s)))))
+  (take (+ 1 (- end start)) (drop start s)))
 
-(defn parse-input
-  ([] (parse-input 
-       (Integer/parseInt (last (s/split (read-line) #" ")))
-       (parse-int-seq (s/split (read-line) #" "))))
-  ([m s]
-     (if (= 0 m) nil
-         (do
-           (let
-               [pis (parse-int-seq (s/split (read-line) #" "))]
-             (println (apply min (subseq s (first pis) (last pis))))
-             (recur (dec m) s))))))
+(loop [m (Integer/parseInt (last (s/split (read-line) #" ")))
+       s (parse-int-seq (s/split (read-line) #" "))]
+  (if (= 0 m) nil
+      (do
+        (let [pis (parse-int-seq (s/split (read-line) #" "))]
+          (println (apply min (subseq s (first pis) (last pis))))
+          (recur (dec m) s)))))
+;still too slow how to make it faster?
+;inlining didn't help much if any
 
-;;what a total lack of clojure thinking. also look into segment trees
+;a lazy sequence would be faster?

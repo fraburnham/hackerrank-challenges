@@ -13,7 +13,7 @@
       (if (= (first sstr) (first fstr))
         (recur (rest sstr) (rest fstr) matchloc (boolean true))
         (if match
-          (recur (drop matchloc sourcestr) findstr 
+          (recur (drop matchloc sourcestr) findstr
                  (+ 1 matchloc) (boolean false))
           (recur (rest sstr) fstr 
                  (inc matchloc) (boolean false)))))))
